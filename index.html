@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>🎃 Halloween Hunt Hub</title>
+  <link rel="stylesheet" href="hub.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🎃 Halloween Hunt Hub</h1>
+    <p id="welcome">Welcome, <span id="playerName">Player</span>!</p>
+    <div class="progress-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-live="polite">
+      <div id="bar"></div>
+      <div class="percent" id="pct">0%</div>
+    </div>
+    <div class="buttons">
+      <button id="btnName">Change Name</button>
+      <button id="btnReset">Reset Progress</button>
+    </div>
+    <div id="list"></div>
+  </div>
+
+  <!-- Modal root (custom, avoids browser prompt/confirm) -->
+  <div id="modalRoot" class="modal-root" aria-hidden="true"></div>
+
+  <script src="hub.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "title": "Clue 1",
+    "text": "Your first clue appears here.",
+    "codes": [
+      "CODE1"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Clue 2",
+    "text": "Your second clue appears here.",
+    "codes": [
+      "CODE2"
+    ]
+  }
+]
