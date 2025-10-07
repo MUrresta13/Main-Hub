@@ -81,3 +81,10 @@ button:hover { background: var(--accent2); }
   box-shadow: 0 10px 24px rgba(0,0,0,.35);
 }
 #toast.show { opacity: 1; }
+
+/* Reveal caption */
+.reveal-caption {
+  margin-top: 6px;
+  font-size: .9rem;
+  color: var(--muted);
+}

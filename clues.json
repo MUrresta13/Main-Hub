@@ -5,7 +5,9 @@
     "text": "Your first clue appears here.",
     "codes": [
       "CODE1"
-    ]
+    ],
+    "answer": "Answer to Clue 1",
+    "reveal_at": "2025-10-07T21:00:00Z"
   },
   {
     "id": 2,
@@ -13,6 +15,8 @@
     "text": "Your second clue appears here.",
     "codes": [
       "CODE2"
-    ]
+    ],
+    "answer": "Answer to Clue 2",
+    "reveal_at": "2025-10-08T21:00:00Z"
   }
 ]
