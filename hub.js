@@ -17,33 +17,16 @@ function saveProgress(){
 }
 function percent(){ return state.clues.length ? Math.round(100*state.unlocked.size/state.clues.length) : 0; }
 
-// ---------- Unlock sound via <audio> tag (70% volume) ----------
+// ---------- Unlock sound (plays on same user gesture) ----------
 function playSpooky(){
   const el = document.getElementById('unlockSound');
   if (!el) return;
   try{
-    el.volume = 0.7;
-    el.currentTime = 0;
-    const p = el.play();
+    el.muted = false;     // ensure unmuted for iOS PWA
+    el.currentTime = 0;   // restart
+    const p = el.play();  // play immediately on the gesture
     if (p && typeof p.then === 'function') p.catch(()=>{});
   }catch(_){}
-}
-
-// ---------- Toast + Flash helpers ----------
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.innerHTML = msg;
-  t.classList.remove('show'); // reset animation
-  // Force reflow to restart CSS animation
-  void t.offsetWidth;
-  t.classList.add('show');
-  // Will auto-hide via CSS animation
-}
-function flash(){
-  const f = document.getElementById('flash');
-  f.classList.remove('show');
-  void f.offsetWidth;
-  f.classList.add('show');
 }
 
 // ---------- Modal (custom) ----------
@@ -94,7 +77,6 @@ function ensureName(){
       const name=(v||'').trim().slice(0,32);
       if(!name) return;
       state.name=name; saveProgress(); renderHeader();
-      showToast('<span class="accent">Name saved</span>');
     }
   });
 }
@@ -111,13 +93,13 @@ function enterCode(id){
       const norm=code.trim().toUpperCase();
       const ok=clue.codes.some(c=>c.toUpperCase()===norm);
       if(ok){
+        // SUCCESS path runs on same tap => allowed to play audio in iOS PWA
         state.unlocked.add(id); saveProgress(); render();
         try{ navigator.vibrate && navigator.vibrate([30,40,20]); }catch(_){}
-        playSpooky();  // sound
-        flash();       // quick screen flash
-        showToast('<span class="accent">Unlocked!</span>');
+        playSpooky(); // <-- primer + playback exactly on this gesture
+        alert('Unlocked!');
       }else{
-        showToast('Incorrect code');
+        alert('Not quite—try again!');
       }
     }
   });
@@ -132,7 +114,6 @@ function resetProgress(){
     onConfirm:(txt)=>{
       if((txt||'').trim().toUpperCase()==='RESET'){
         state.unlocked.clear(); saveProgress(); render();
-        showToast('<span class="accent">Progress reset</span>');
       }
     }
   });
