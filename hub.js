@@ -17,19 +17,28 @@ function saveProgress(){
 }
 function percent(){ return state.clues.length ? Math.round(100*state.unlocked.size/state.clues.length) : 0; }
 
-// ---------- Unlock sound (plays on same user gesture) ----------
+// ---------- Unlock sound (play on same user gesture) ----------
 function playSpooky(){
   const el = document.getElementById('unlockSound');
   if (!el) return;
   try{
-    el.muted = false;     // ensure unmuted for iOS PWA
-    el.currentTime = 0;   // restart
-    const p = el.play();  // play immediately on the gesture
+    el.muted = false;
+    el.currentTime = 0;
+    const p = el.play();
     if (p && typeof p.then === 'function') p.catch(()=>{});
   }catch(_){}
 }
 
-// ---------- Modal (custom) ----------
+// ---------- Toast ----------
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(showToast._timer);
+  showToast._timer = setTimeout(()=> t.classList.remove('show'), 1600);
+}
+
+// ---------- Modal ----------
 function showModal({title,label,placeholder='',confirmText='OK',cancelText='Cancel',type='text',defaultValue='',onConfirm}){
   const root=document.getElementById('modalRoot');
   root.setAttribute('aria-hidden','false');
@@ -93,13 +102,13 @@ function enterCode(id){
       const norm=code.trim().toUpperCase();
       const ok=clue.codes.some(c=>c.toUpperCase()===norm);
       if(ok){
-        // SUCCESS path runs on same tap => allowed to play audio in iOS PWA
+        // same tap => allowed to play audio in iOS PWA
         state.unlocked.add(id); saveProgress(); render();
         try{ navigator.vibrate && navigator.vibrate([30,40,20]); }catch(_){}
-        playSpooky(); // <-- primer + playback exactly on this gesture
-        alert('Unlocked!');
+        playSpooky();
+        showToast('🎃 Unlocked!');
       }else{
-        alert('Not quite—try again!');
+        showToast('❌ Incorrect code');
       }
     }
   });
@@ -114,6 +123,7 @@ function resetProgress(){
     onConfirm:(txt)=>{
       if((txt||'').trim().toUpperCase()==='RESET'){
         state.unlocked.clear(); saveProgress(); render();
+        showToast('Progress reset');
       }
     }
   });
