@@ -17,18 +17,36 @@ function saveProgress(){
 }
 function percent(){ return state.clues.length ? Math.round(100*state.unlocked.size/state.clues.length) : 0; }
 
-// ---------- Unlock sound via <audio> tag ----------
+// ---------- Unlock sound via <audio> tag (70% volume) ----------
 function playSpooky(){
   const el = document.getElementById('unlockSound');
   if (!el) return;
   try{
+    el.volume = 0.7;
     el.currentTime = 0;
     const p = el.play();
     if (p && typeof p.then === 'function') p.catch(()=>{});
   }catch(_){}
 }
 
-// ---------- Modal (custom, avoids prompt/confirm suppression) ----------
+// ---------- Toast + Flash helpers ----------
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.innerHTML = msg;
+  t.classList.remove('show'); // reset animation
+  // Force reflow to restart CSS animation
+  void t.offsetWidth;
+  t.classList.add('show');
+  // Will auto-hide via CSS animation
+}
+function flash(){
+  const f = document.getElementById('flash');
+  f.classList.remove('show');
+  void f.offsetWidth;
+  f.classList.add('show');
+}
+
+// ---------- Modal (custom) ----------
 function showModal({title,label,placeholder='',confirmText='OK',cancelText='Cancel',type='text',defaultValue='',onConfirm}){
   const root=document.getElementById('modalRoot');
   root.setAttribute('aria-hidden','false');
@@ -76,6 +94,7 @@ function ensureName(){
       const name=(v||'').trim().slice(0,32);
       if(!name) return;
       state.name=name; saveProgress(); renderHeader();
+      showToast('<span class="accent">Name saved</span>');
     }
   });
 }
@@ -94,10 +113,11 @@ function enterCode(id){
       if(ok){
         state.unlocked.add(id); saveProgress(); render();
         try{ navigator.vibrate && navigator.vibrate([30,40,20]); }catch(_){}
-        playSpooky(); // plays your uploaded MP3 once
-        alert('Unlocked!');
+        playSpooky();  // sound
+        flash();       // quick screen flash
+        showToast('<span class="accent">Unlocked!</span>');
       }else{
-        alert('Not quite—try again!');
+        showToast('Incorrect code');
       }
     }
   });
@@ -112,6 +132,7 @@ function resetProgress(){
     onConfirm:(txt)=>{
       if((txt||'').trim().toUpperCase()==='RESET'){
         state.unlocked.clear(); saveProgress(); render();
+        showToast('<span class="accent">Progress reset</span>');
       }
     }
   });
