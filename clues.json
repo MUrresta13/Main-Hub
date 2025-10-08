@@ -28,5 +28,15 @@
     ],
     "answer": "Behind the October calendar on the refrigerator.",
     "reveal_at": "2025-10-08T21:00:00Z"
-  }
+  },
+  {
+    "id": 3,
+    "title": "Clue 3",
+    "text": "It's round and clear, with faces you know. Look underneath where love and memories show.",
+    "codes": [
+      "DRACULASDEBT"
+    ],
+    "answer": "Under the 'Our Family' snow globe.",
+    "reveal_at": "2025-10-07T21:00:00Z"
+  },
 ]
