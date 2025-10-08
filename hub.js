@@ -1,3 +1,6 @@
+// ===== Versioning for cache busting =====
+const CLUES_VERSION = 1; // <-- Increase this number every time you update clues.json
+
 // ===== State & persistence =====
 const state = { name:'', unlocked:new Set(), clues:[] };
 const LS_KEY = 'hunt_progress_v1';
