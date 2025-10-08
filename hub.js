@@ -216,7 +216,7 @@ function render(){
 
         const cap = document.createElement('div');
         cap.className = 'reveal-caption';
-        cap.textContent = 'Reveals at ' + localTimeCaption(revealAt);
+        cap.textContent = 'Reveals on ' + localTimeCaption(revealAt);
 
         btn.onclick = ()=>{
           const now = Date.now();
