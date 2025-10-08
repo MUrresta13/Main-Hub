@@ -1,5 +1,15 @@
 [
   {
+    "id": 0,
+    "title": "Tutorial Clue. Type 'HALLOWEEN2025' to unlock",
+    "text": "I guard the things that tread the ground, yet I make no move, I make no sound. Open my door and look inside - the first step forward is where I hide.",
+    "codes": [
+      "HALLOWEEN2025"
+    ],
+    "answer": "Behind the shoe closet door near the front of the house.",
+    "reveal_at": "2025-10-01T04:00:00Z"
+  },
+  {
     "id": 1,
     "title": "Clue 1",
     "text": "Your first clue appears here.",
