@@ -42,11 +42,13 @@
   {
     "id": 4,
     "title": "Clue 4",
-    "text": "Where water runs and shadows creep, secrets hide where the pipes sleep. Open the door, don't overthink - your next clue waits beneath the sink.",
+    "text": "I stand above the place that heats, beside some cups where thirst retreats. Find the green one, lift, and peek - your next clue hides beneath its seat.
+    
+    QR Passcode: LANTERNSLIE",
     "codes": [
       "GRAVEMISTAKE"
     ],
-    "answer": "Behind the door of the cabinet under the sink in the basement bathroom.",
+    "answer": "Under the green cup inside the cabinet above the microwave.",
     "reveal_at": "2025-10-07T21:00:00Z"
   },
   {
@@ -54,7 +56,7 @@
     "title": "Clue 5",
     "text": "Where water runs and shadows creep, secrets hide where the pipes sleep. Open the door, don't overthink - your next clue waits beneath the sink.",
     "codes": [
-      "DRACULASDEBT"
+      "BEETLEJUICERULETHREE"
     ],
     "answer": "Behind the door of the cabinet under the sink in the basement bathroom.",
     "reveal_at": "2025-10-07T21:00:00Z"
